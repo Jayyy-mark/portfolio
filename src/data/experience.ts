@@ -4,6 +4,8 @@
  * ============================================================
  *  Mix of professional roles, education, and notable projects.
  *  Mark `highlight: true` for standout entries (adds a glow).
+ *
+ *  Sourced from cv_form.pdf (Naing Ye Htut).
  */
 
 export interface ExperienceItem {
@@ -20,49 +22,49 @@ export interface ExperienceItem {
 
 export const experience: ExperienceItem[] = [
   {
-    id: "lead-frontend-studio",
-    role: "Lead Frontend Engineer",
-    organization: "Northwind Studio",
-    date: "2022 — Present",
+    id: "moge-fullstack-devops",
+    role: "Software Engineer · Full-Stack Developer · DevOps",
+    organization: "Ministry of Electricity & Energy — MOGE (Freelance)",
+    date: "Mar 2026 — Present",
     description:
-      "Lead the frontend practice for a 12-person product studio. Built two design systems from scratch, mentored four engineers, and shipped 14 client products across fintech and healthcare.",
-    tags: ["React", "Design Systems", "Team Lead", "Motion"],
+      "Analyze requirements and design system architecture, database structures, and application workflows. Independently develop full-stack applications across frontend, backend, REST APIs, databases, and micro services, with deployment primarily using Docker. Engineer RAG and agentic AI workflows using LLMs, LangGraph, LlamaIndex, embeddings, and vector databases.",
+    tags: ["Python", "Django", "Docker", "RAG", "LangGraph", "REST API"],
     highlight: true,
   },
   {
-    id: "senior-product-engineer",
-    role: "Senior Product Engineer",
-    organization: "Lattice Labs",
-    date: "2020 — 2022",
+    id: "ucst-backend-devops-internship",
+    role: "Backend Engineer · DevOps (Internship)",
+    organization: "University of Computer Studies, Taungoo",
+    date: "Mar 2026 — Jul 2026",
     description:
-      "Joined as the 4th engineer and helped scale the product to 40k DAU. Owned the dashboard, onboarding flows, and the component library that's still in use today.",
-    tags: ["Next.js", "tRPC", "Prisma", "PostgreSQL"],
+      "Designed and developed REST APIs, database architecture, and core application services for the university platform. Built and integrated a RAG-based knowledge retrieval system for processing, indexing, and querying institutional documents. Implemented frontend integration and application deployment on Linux, including server configuration and maintenance.",
+    tags: ["REST API", "RAG", "Linux", "Deployment", "Server Config"],
   },
   {
-    id: "frontend-developer-agency",
-    role: "Frontend Developer",
-    organization: "Field & Co. Digital Agency",
-    date: "2018 — 2020",
+    id: "kyaw-family-scaffolding-freelance",
+    role: "Full-Stack Developer (Freelance)",
+    organization: "Kyaw Family Scaffolding",
+    date: "2024",
     description:
-      "Shipped 20+ marketing and product sites for brands across Europe. Specialized in motion-led, accessible interfaces and performance budgets under 100kb.",
-    tags: ["React", "GSAP", "Lighthouse", "A11y"],
+      "Built a rental management system for a scaffolding sales and rental business — inventory, rental orders, billing, and customer records. Delivered the complete stack from design through deployment.",
+    tags: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker"],
   },
   {
-    id: "designer-freelance",
-    role: "Freelance Designer & Developer",
-    organization: "Independent",
-    date: "2017 — 2018",
+    id: "bago-product-zone-internship",
+    role: "Full-Stack Developer (Internship)",
+    organization: "University of Computer Studies, Taungoo — Bago Product Zone",
+    date: "2025",
     description:
-      "Transitioned from graphic design into the web. Built my first React apps, learned TypeScript, and took on early freelance clients.",
-    tags: ["Figma", "React", "CSS", "Branding"],
+      "Developed the university product-zone platform showcasing student and faculty products — catalog, search, filtering, and admin panel. Contributed to both frontend and backend during the internship.",
+    tags: ["React", "TypeScript", "Flask", "Tailwind CSS"],
   },
   {
     id: "education",
-    role: "B.Sc. Interactive Media Design",
-    organization: "University of Porto",
-    date: "2013 — 2017",
+    role: "Bachelor of Computer Science (B.C.Sc.)",
+    organization: "University of Computer Studies, Taungoo",
+    date: "Expected graduation: Feb 2027",
     description:
-      "First-class honours. Thesis on motion in interface design — the seed of the work I still do today.",
-    tags: ["Interaction Design", "HCI", "Motion"],
+      "Undergraduate in Computer Science. Coursework spanning software engineering, databases, algorithms, and systems — applied directly through freelance and internship work.",
+    tags: ["Computer Science", "Software Engineering", "Algorithms"],
   },
 ];

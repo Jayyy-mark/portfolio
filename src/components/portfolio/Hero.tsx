@@ -178,7 +178,7 @@ export function Hero() {
                       <div>
                         <p className="text-xs text-muted-foreground">Currently</p>
                         <p className="text-sm font-semibold leading-none mt-1">
-                          Open to work
+                          Building &amp; shipping
                         </p>
                       </div>
                     </div>
@@ -196,7 +196,7 @@ export function Hero() {
                     <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                       Stack
                     </p>
-                    <p className="text-sm font-semibold mt-1">React · TS · Motion</p>
+                    <p className="text-sm font-semibold mt-1">Python · React · Docker</p>
                   </div>
                 </motion.div>
               </div>

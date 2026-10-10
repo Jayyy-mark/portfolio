@@ -16,32 +16,40 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aria Vance — Frontend Developer & Digital Experience Designer",
+  title: "Naing Ye Htut — Full-Stack Developer & AI Engineer",
   description:
-    "Portfolio of Aria Vance, a frontend developer and digital experience designer crafting premium, accessible, and performant web experiences with React, TypeScript, and motion design.",
+    "Portfolio of Naing Ye Htut, a full-stack developer and AI engineer building scalable web applications, REST APIs, microservices, and RAG / agentic AI workflows with Python, React/TypeScript, and Docker.",
   keywords: [
-    "frontend developer",
+    "full-stack developer",
     "portfolio",
     "React",
     "TypeScript",
-    "UI engineering",
-    "glassmorphism",
-    "digital experiences",
+    "Python",
+    "Django",
+    "Flask",
+    "Laravel",
+    "Docker",
+    "RAG",
+    "LLMs",
+    "LangGraph",
+    "AI engineer",
+    "Myanmar",
+    "Taungoo",
   ],
-  authors: [{ name: "Aria Vance" }],
+  authors: [{ name: "Naing Ye Htut" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Aria Vance — Frontend Developer & Digital Experience Designer",
+    title: "Naing Ye Htut — Full-Stack Developer & AI Engineer",
     description:
-      "Premium portfolio showcasing frontend engineering, motion design, and product craft.",
+      "Full-stack engineering, AI/RAG systems, and DevOps — building scalable web applications and agentic AI workflows.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aria Vance — Frontend Developer",
-    description: "Premium portfolio showcasing frontend engineering and motion design.",
+    title: "Naing Ye Htut — Full-Stack Developer & AI Engineer",
+    description: "Full-stack engineering, AI/RAG systems, and DevOps.",
   },
 };
 

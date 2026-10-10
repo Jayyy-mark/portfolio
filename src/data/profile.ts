@@ -4,6 +4,10 @@
  * ============================================================
  *  All personal info, social links, and copy live here so you
  *  can rebrand the entire site from one place.
+ *
+ *  Data sourced from cv_form.pdf + Previous Project Experience.pdf
+ *  (Naing Ye Htut). Salary and availability-time fields from the
+ *  source documents were intentionally omitted per request.
  */
 
 export interface SocialLink {
@@ -21,44 +25,45 @@ export interface SocialLink {
 
 export const profile = {
   /** Monogram shown in the navbar + footer */
-  monogram: "AV",
-  name: "Aria Vance",
-  firstName: "Aria",
-  role: "Frontend Developer & Digital Experience Designer",
+  monogram: "NY",
+  name: "Naing Ye Htut",
+  firstName: "Naing Ye Htut",
+  role: "Full-Stack Developer & AI Engineer",
   /** Short tagline shown under the hero headline */
   tagline:
-    "I design and engineer premium, accessible web experiences — where motion, type, and interface meet intention.",
-  location: "Lisbon, Portugal",
-  email: "hello@ariavance.dev",
+    "Full-stack engineer and AI engineer building scalable web applications, RAG systems, and agentic AI workflows.",
+  location: "Taungoo, Bago, Myanmar",
+  email: "jaycoab2@gmail.com",
+  /** Note: salary / availability-time intentionally excluded */
   availability: "Available for opportunities",
   /** Hero headline — `highlight` words receive the gradient treatment */
   heroHeadline: {
-    prefix: "Hi, I'm Aria — I Build",
-    highlights: ["Digital", "Experiences"],
-    suffix: "that feel alive.",
+    prefix: "Hi, I'm Naing Ye Htut — I Build",
+    highlights: ["Full-Stack", "AI-Powered"],
+    suffix: "experiences.",
   },
   heroIntro:
-    "Frontend engineer and digital designer with 7+ years crafting interfaces for startups, design studios, and enterprise teams. I blend motion, systems thinking, and obsessive attention to detail to ship products people love to use.",
+    "Full-Stack Developer specialized in software engineering, backend, frontend, and full-stack development. Strong experience in Python, React/TypeScript, Docker, server configuration & deployment, with a deep understanding of application architecture and REST API development. Also experienced in AI engineering, RAG, LLMs, and agentic workflows.",
   resumeUrl: "#",
   bio: {
     short:
-      "I'm a frontend engineer and designer based in Lisbon. For the last seven years I've been shipping fast, accessible, and visually distinctive web products — from early-stage SaaS dashboards to immersive marketing sites and design systems used by hundreds of engineers.",
-    long: "I started as a graphic designer, fell in love with the web's kinetic potential, and never looked back. Today I work at the intersection of engineering and design: I write production React and TypeScript, prototype in Figma, and obsess over the micro-interactions that make a product feel premium. I believe great interfaces are quiet — they get out of the way so the work can speak.",
+      "I'm a full-stack developer and AI engineer based in Taungoo, Myanmar. I design and build scalable web applications, REST APIs, microservices, and AI systems — from Flask/Django backends and React/TypeScript frontends to RAG pipelines and agentic LLM workflows.",
+    long: "I work across the entire stack: server configuration on Linux, Docker-based deployment with Nginx and Gunicorn, REST API design, database architecture, and production frontend engineering in React and TypeScript. On the AI side, I build RAG and agentic workflows using LLMs, LangGraph, LlamaIndex, embeddings, and vector databases. I care about clean architecture, maintainable systems, and shipping software that actually runs reliably in production.",
     philosophy:
-      "Build with restraint, animate with intent, and never ship something you wouldn't use yourself.",
+      "Build systems that scale, automate what repeats, and let AI handle the heavy lifting where it truly fits.",
   },
   /** Quick stats shown as glass cards in the About section */
   stats: [
-    { value: "7+", label: "Years of experience" },
-    { value: "60+", label: "Shipped projects" },
-    { value: "24", label: "Technologies" },
-    { value: "12", label: "Open-source repos" },
+    { value: "5+", label: "Production projects shipped" },
+    { value: "5", label: "Backend frameworks mastered" },
+    { value: "3", label: "AI / RAG systems built" },
+    { value: "100%", label: "Dockerized deployments" },
   ],
   socials: [
-    { label: "GitHub", href: "https://github.com", icon: "Github" },
-    { label: "LinkedIn", href: "https://linkedin.com", icon: "Linkedin" },
-    { label: "Twitter", href: "https://twitter.com", icon: "Twitter" },
-    { label: "Dribbble", href: "https://dribbble.com", icon: "Dribbble" },
+    { label: "GitHub", href: "https://github.com/Jayyy-mark", icon: "Github" },
+    { label: "Email", href: "mailto:jaycoab2@gmail.com", icon: "Mail" },
+    { label: "Bago Product Zone", href: "https://bagoproductzone.ucstaungoo.edu.mm/", icon: "Globe" },
+    { label: "UCSTGO", href: "https://www.ucstaungoo.edu.mm/", icon: "Globe" },
   ] satisfies SocialLink[],
   /** Navbar nav items — `id` must match the section element's `id` */
   nav: [

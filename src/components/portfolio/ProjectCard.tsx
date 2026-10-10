@@ -80,10 +80,17 @@ export const ProjectCard = React.forwardRef<
           )}
         </div>
 
-        {/* Year */}
-        <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full glass-subtle px-2.5 py-1 text-[11px] text-muted-foreground">
-          <Calendar className="h-3 w-3" /> {project.year}
-        </span>
+        {/* Engagement + Year */}
+        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
+          {project.engagement && (
+            <span className="inline-flex items-center gap-1.5 rounded-full glass-strong glass-highlight px-2.5 py-1 text-[11px] font-medium text-foreground/80">
+              {project.engagement}
+            </span>
+          )}
+          <span className="ml-auto inline-flex items-center gap-1.5 rounded-full glass-subtle px-2.5 py-1 text-[11px] text-muted-foreground">
+            <Calendar className="h-3 w-3" /> {project.year}
+          </span>
+        </div>
       </div>
 
       {/* Body */}

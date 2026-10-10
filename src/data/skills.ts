@@ -3,6 +3,9 @@
  *  SKILLS DATA — Grouped, editable. No percentage bars.
  * ============================================================
  *  `icon` should be a short glyph rendered inside a glass chip.
+ *
+ *  Categories reflect Naing Ye Htut's actual tech stack
+ *  (cv_form.pdf).
  */
 
 export interface SkillGroup {
@@ -17,55 +20,62 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "frontend",
     title: "Frontend Development",
-    blurb: "Production-grade interfaces and design systems.",
+    blurb: "Interfaces and frontend systems in React and TypeScript.",
     skills: [
       { name: "React", icon: "⚛" },
-      { name: "Next.js", icon: "▲" },
       { name: "TypeScript", icon: "TS" },
       { name: "JavaScript", icon: "JS" },
       { name: "Tailwind CSS", icon: "~" },
-      { name: "Framer Motion", icon: "✦" },
-      { name: "Redux Toolkit", icon: "◆" },
+      { name: "HTML5", icon: "❮" },
+      { name: "CSS3", icon: "❯" },
+      { name: "Bootstrap", icon: "B" },
     ],
   },
   {
     id: "backend",
-    title: "Backend Development",
-    blurb: "APIs, data, and the systems that power the front.",
+    title: "Backend Engineering",
+    blurb: "REST APIs and server-side systems across multiple stacks.",
     skills: [
+      { name: "Python", icon: "Py" },
+      { name: "Flask", icon: "▶" },
+      { name: "Django", icon: "⌘" },
       { name: "Node.js", icon: "⬡" },
-      { name: "Express", icon: "→" },
-      { name: "tRPC", icon: "⇄" },
-      { name: "Prisma", icon: "▼" },
-      { name: "PostgreSQL", icon: "🗄" },
-      { name: "REST APIs", icon: "∮" },
-      { name: "WebSockets", icon: "↯" },
+      { name: "Express.js", icon: "→" },
+      { name: "Laravel", icon: "‹›" },
+      { name: "ASP.NET", icon: "#" },
+      { name: "PHP", icon: "🐘" },
+      { name: "C#", icon: "C" },
     ],
   },
   {
-    id: "tools",
-    title: "Tools & Workflow",
-    blurb: "How I ship — version control, testing, and CI.",
+    id: "ai",
+    title: "AI Engineering",
+    blurb: "RAG pipelines, LLMs, and agentic AI workflows.",
     skills: [
-      { name: "Git", icon: "⌥" },
-      { name: "GitHub", icon: "〇" },
-      { name: "Vite", icon: "⚡" },
-      { name: "Vitest", icon: "✓" },
+      { name: "LLMs", icon: "✦" },
+      { name: "RAG", icon: "⇄" },
+      { name: "LangGraph", icon: "◍" },
+      { name: "LlamaIndex", icon: "▲" },
+      { name: "Embeddings", icon: "≣" },
+      { name: "Vector Databases", icon: "▣" },
+      { name: "Agentic AI", icon: "❍" },
+      { name: "Machine Learning", icon: "◆" },
+      { name: "Deep Learning", icon: "◈" },
+    ],
+  },
+  {
+    id: "devops",
+    title: "DevOps & Infrastructure",
+    blurb: "Deployment, server configuration, and containerization.",
+    skills: [
       { name: "Docker", icon: "⬢" },
-      { name: "ESLint", icon: "§" },
-    ],
-  },
-  {
-    id: "design",
-    title: "Design & UI/UX",
-    blurb: "Where engineering sensibility meets visual craft.",
-    skills: [
-      { name: "Figma", icon: "✎" },
-      { name: "Design Systems", icon: "▦" },
-      { name: "Accessibility", icon: "♿" },
-      { name: "Motion Design", icon: "❍" },
-      { name: "Prototyping", icon: "◷" },
-      { name: "Typography", icon: "Aa" },
+      { name: "Linux", icon: "🐧" },
+      { name: "Nginx", icon: "⌥" },
+      { name: "Gunicorn", icon: "∥" },
+      { name: "Git", icon: "⌥" },
+      { name: "CI/CD", icon: "↻" },
+      { name: "Server Configuration", icon: "⚙" },
+      { name: "REST API", icon: "∮" },
     ],
   },
 ];

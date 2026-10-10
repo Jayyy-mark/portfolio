@@ -118,3 +118,66 @@ Stage Summary:
   - 640–1023px (large phones + tablets portrait): monogram + name + CTA + hamburger.
   - 1024px+ (tablets landscape, laptops, desktops, ultrawide): monogram + name + full nav links + CTA.
 - Hero no longer has text sitting under the navbar (increased top padding + 100svh viewport).
+
+---
+Task ID: 17
+Agent: image-generation
+Task: Generate 5 project preview images for real portfolio projects
+
+Work Log:
+- Read existing worklog.md to review work done by Task IDs 1, 2-14, 15, 16 (previous images, build, scroll-jank + navbar fixes).
+- Verified /home/z/my-project/public/images/ contained hero-avatar.png + project-1.png through project-4.png (will overwrite project-1..4 and add project-5.png).
+- Confirmed `z-ai` CLI available and ran each generation one at a time at 1344x768.
+- Generated project-1.png — Bago Product Zone (university e-commerce/product platform), dark glassmorphism UI mockup, violet/cyan accents — verified 97824 bytes.
+- Generated project-2.png — Kyaw Family Scaffolding Rental Management System, dark dashboard UI mockup with inventory + rental orders + billing cards, cyan/blue accents — verified 86473 bytes.
+- Generated project-3.png — MOGE Document Archiving & Management System, dark glassmorphism file browser with folders grid + metadata sidebar, violet/cyan accents — verified 89496 bytes.
+- Generated project-4.png — MOGE Human Resources Management System, dark HR dashboard UI mockup with employee directory + attendance/payroll charts + leave management, cyan/blue accents — verified 96424 bytes.
+- Generated project-5.png — UCSTGO Web Portal (university official website), dark glassmorphism hero + news/announcements cards + academic programs showcase, violet/cyan accents — verified 79563 bytes (new file).
+- All 5 generations succeeded on the first attempt (no retries needed); every file is well above the 10KB minimum threshold.
+- Ran final `ls -la /home/z/my-project/public/images/` to confirm all 6 images present (hero-avatar + project-1..5).
+
+Stage Summary:
+- Successfully generated all 5 real-project preview images on first attempt (no retries required):
+  - /home/z/my-project/public/images/project-1.png (97824 bytes, 1344x768) — Bago Product Zone
+  - /home/z/my-project/public/images/project-2.png (86473 bytes, 1344x768) — Kyaw Family Scaffolding Rental Management System
+  - /home/z/my-project/public/images/project-3.png (89496 bytes, 1344x768) — MOGE Document Archiving & Management System
+  - /home/z/my-project/public/images/project-4.png (96424 bytes, 1344x768) — MOGE Human Resources Management System
+  - /home/z/my-project/public/images/project-5.png (79563 bytes, 1344x768) — UCSTGO Web Portal (NEW)
+- All 5 images follow the consistent brief: dark glassmorphism UI mockup style, deep navy background, cyan/violet/blue accent gradients, high detail, 1344x768.
+- Total: 5/5 images generated successfully; all above the 10KB minimum size threshold.
+---
+Task ID: 18
+Agent: main (orchestrator)
+Task: Analyze uploaded CV (cv_form.pdf) + Previous Project Experience.pdf, populate the portfolio with that data, exclude salary and availability-time fields
+
+Work Log:
+- Extracted text from both PDFs via pdftotext -layout.
+- cv_form.pdf → Naing Ye Htut, jaycoab2@gmail.com, 09676067433, Taungoo Bago Myanmar, github.com/Jayyy-mark; Full-Stack Developer; B.C.Sc. at University of Computer Studies Taungoo (expected Feb 2027); skills (Python, C#, PHP, JS; Flask/Django/Laravel/ASP.NET/Node-Express; React/TS, HTML/CSS/Tailwind/Bootstrap; Git/CI-CD/Docker/Linux/Nginx/Gunicorn; AI: LLMs/RAG/LangGraph/LlamaIndex/embeddings/vector DBs/agentic workflows, ML, DL); career (Software Engineer·Full-Stack·DevOps freelance at MOGE Mar 2026–Present; Backend Engineer·DevOps internship at UCST Mar 2026–Jul 2026); interests (AI Engineering, ML/DL, Backend & Full-Stack, DevOps & Automation, Software Engineering).
+- Previous Project Experience.pdf → 5 real projects: Bago Product Zone (https://bagoproductzone.ucstaungoo.edu.mm/), Kyaw Family Scaffolding Rental Management (https://kyawfamilyscaffolding.com/), MOGE Document Archiving & Management System, MOGE Human Resources Management System, UCSTGO Web Portal (https://www.ucstaungoo.edu.mm/). Also contained "Expected Salary 1000000–1500000MMK" and "Availability – Semi-full-time preferred; Full-time also available" — EXCLUDED per user instruction.
+- Dispatched subagent (Task ID 17) to regenerate 5 project preview images matching the real projects (Bago Product Zone, Kyaw Scaffolding, MOGE Docs, MOGE HR, UCSTGO Portal) — all 5 generated at 1344x768, dark glassmorphism style, 78–98KB each.
+- Updated src/data/profile.ts: monogram NY, name "Naing Ye Htut", role "Full-Stack Developer & AI Engineer", email jaycoab2@gmail.com, location Taungoo Bago Myanmar, heroHeadline "Hi, I'm Naing Ye Htut — I Build [Full-Stack] [AI-Powered] experiences.", full hero intro + bio short/long + philosophy rewritten from the CV summary, stats (5+ projects, 5 backend frameworks, 3 AI/RAG systems, 100% Dockerized), socials (GitHub, Email, Bago Product Zone, UCSTGO).
+- Updated src/data/projects.ts: 5 real projects with correct categories (Web Apps / Full-Stack / Enterprise), real live URLs where available, GitHub repo links, real tech stacks (Laravel/PHP/MySQL/Docker for Kyaw Scaffolding; Django/Python/PostgreSQL/Docker/Nginx for MOGE systems; React/TypeScript/Flask for Bago Product Zone; React/TS/Node/Express for UCSTGO), engagement-type badges (Internship/Freelance + org). Added new `engagement` field to the Project type.
+- Updated src/data/skills.ts: 4 groups reflecting actual stack — Frontend (React/TS/JS/Tailwind/HTML/CSS/Bootstrap), Backend Engineering (Python/Flask/Django/Node/Express/Laravel/ASP.NET/PHP/C#), AI Engineering (LLMs/RAG/LangGraph/LlamaIndex/Embeddings/Vector DBs/Agentic AI/ML/DL), DevOps & Infrastructure (Docker/Linux/Nginx/Gunicorn/Git/CI-CD/Server Config/REST API).
+- Updated src/data/experience.ts: timeline with MOGE Software Engineer·Full-Stack·DevOps (Mar 2026–Present, highlight:true), UCST Backend Engineer·DevOps internship (Mar 2026–Jul 2026), Kyaw Family Scaffolding freelance (2024), Bago Product Zone internship (2025), B.C.Sc. education (expected Feb 2027).
+- Updated src/app/layout.tsx metadata: title/description/keywords/OpenGraph/Twitter all reflect "Naing Ye Htut — Full-Stack Developer & AI Engineer".
+- Updated Hero.tsx: floating "Open to work" chip → "Building & shipping"; "React · TS · Motion" stack chip → "Python · React · Docker".
+- Updated ProjectCard.tsx: added engagement-type badge display next to year on the thumbnail overlay.
+- Verified in Agent Browser (1440px + 390px):
+  - title = "Naing Ye Htut — Full-Stack Developer & AI Engineer"
+  - H1 = "Hi, I'm Naing Ye Htut — I Build Full-Stack AI-Powered experiences."
+  - Navbar shows "NY / Naing Ye Htut / Full-Stack Developer"
+  - 5 projects render with correct titles (Bago Product Zone, Kyaw Family Scaffolding — Rental Management, MOGE — Document Archiving & Management, MOGE — Human Resources Management, UCSTGO Web Portal) and all 5 images load (475px natural width after Next.js optimization)
+  - Filter categories work: All=5, Enterprise=2 (both MOGE systems), Full-Stack=1 (Kyaw Scaffolding), Web Apps=2; back to All=5
+  - Skills groups = Frontend Development / Backend Engineering / AI Engineering / DevOps & Infrastructure
+  - Experience roles match the CV
+  - Contact email = jaycoab2@gmail.com, socials = GitHub / Email / Bago Product Zone / UCSTGO
+  - No console/page errors; mobile (390px) renders cleanly with name visible, navbar visible, no overflow
+  - VLM: "introduces Naing Ye Htut, a Full-Stack Developer specializing in AI-powered experiences. The name and headline are clearly visible in large, bold typography with excellent contrast."
+- `bun run lint` clean.
+
+Stage Summary:
+- Portfolio fully rebranded from "Aria Vance" placeholder to real data from Naing Ye Htut's CV and Previous Project Experience PDFs.
+- All 8 sections now show real, accurate content: real name/role/contact, 5 real shipped projects (with live URLs and engagement types), real tech stack grouped into Frontend/Backend/AI Engineering/DevOps, real career history + education timeline.
+- Per user instruction: salary (1,000,000–1,500,000 MMK) and availability-time ("Semi-full-time preferred; Full-time also available") were deliberately excluded from all data files and the UI. Only the generic "Available for opportunities" availability badge remains.
+- 5 new project preview images generated to match the real projects.
+- All filters, navigation, and responsiveness still work (verified at 1440px desktop and 390px mobile).

@@ -4,9 +4,12 @@
  * ============================================================
  *  Add / remove / reorder projects freely. Image paths point
  *  to files in /public/images. Categories drive the filter UI.
+ *
+ *  Projects sourced from Previous Project Experience.pdf
+ *  (Naing Ye Htut). All entries are real shipped projects.
  */
 
-export type ProjectCategory = "Web Apps" | "UI/UX" | "Experiments";
+export type ProjectCategory = "Web Apps" | "Full-Stack" | "Enterprise";
 
 export interface Project {
   id: string;
@@ -28,69 +31,91 @@ export interface Project {
   badge?: string;
   /** Tint applied over the thumbnail on hover */
   accent: "cyan" | "violet" | "blue";
+  /** Engagement type shown on the card */
+  engagement: string;
 }
 
 export const projectCategories: ("All" | ProjectCategory)[] = [
   "All",
   "Web Apps",
-  "UI/UX",
-  "Experiments",
+  "Full-Stack",
+  "Enterprise",
 ];
 
 export const projects: Project[] = [
   {
-    id: "lumen-analytics",
-    title: "Lumen Analytics",
+    id: "bago-product-zone",
+    title: "Bago Product Zone",
     description:
-      "A real-time SaaS analytics dashboard for product teams. Glassmorphism interface, streaming charts, and a fully themeable design system used across 4 surfaces.",
+      "University product-zone platform showcasing student and faculty products. Designed and shipped the full-stack web app — catalog, search, filtering, and an admin panel — during my internship at University of Computer Studies, Taungoo.",
     category: "Web Apps",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "tRPC", "Postgres"],
-    liveUrl: "#",
-    repoUrl: "https://github.com",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Flask", "REST API"],
+    liveUrl: "https://bagoproductzone.ucstaungoo.edu.mm/",
+    repoUrl: "https://github.com/Jayyy-mark",
     image: "/images/project-1.png",
-    year: "2024",
-    badge: "Featured",
-    accent: "cyan",
+    year: "2025",
+    badge: "Internship",
+    accent: "violet",
+    engagement: "Internship · UCST",
   },
   {
-    id: "halcyon-banking",
-    title: "Halcyon Banking",
+    id: "kyaw-family-scaffolding",
+    title: "Kyaw Family Scaffolding — Rental Management",
     description:
-      "A mobile-first fintech experience focused on calm, trustworthy money management. Designed and shipped the entire frontend — from motion language to the component library.",
-    category: "UI/UX",
-    stack: ["React Native", "Reanimated", "Figma", "Storybook"],
-    liveUrl: "#",
-    repoUrl: "https://github.com",
+      "A rental management system for a scaffolding sales and rental business. Handles inventory, rental orders, billing, and customer records. Built end-to-end as a freelance engagement, including deployment.",
+    category: "Full-Stack",
+    stack: ["Laravel", "PHP", "MySQL", "Bootstrap", "Docker"],
+    liveUrl: "https://kyawfamilyscaffolding.com/",
+    repoUrl: "https://github.com/Jayyy-mark",
     image: "/images/project-2.png",
     year: "2024",
-    badge: "Case study",
-    accent: "violet",
-  },
-  {
-    id: "prism-visualisation",
-    title: "Prism Visualisation",
-    description:
-      "An interactive data visualization platform for research teams. Renders 100k+ nodes smoothly using WebGL with a fallback canvas renderer.",
-    category: "Web Apps",
-    stack: ["React", "WebGL", "D3", "Vite", "Zustand"],
-    liveUrl: "#",
-    repoUrl: "https://github.com",
-    image: "/images/project-3.png",
-    year: "2023",
-    accent: "blue",
-  },
-  {
-    id: "drift-generative",
-    title: "Drift — Generative Art",
-    description:
-      "An open-source generative art playground built on flow fields and noise. Exports 4K prints and animated GIFs straight from the browser.",
-    category: "Experiments",
-    stack: ["TypeScript", "Canvas", "Web Workers", "p5.js"],
-    liveUrl: "#",
-    repoUrl: "https://github.com",
-    image: "/images/project-4.png",
-    year: "2023",
-    badge: "Open source",
+    badge: "Freelance",
     accent: "cyan",
+    engagement: "Freelance",
+  },
+  {
+    id: "moge-document-archiving",
+    title: "MOGE — Document Archiving & Management",
+    description:
+      "Enterprise document archiving and management system for the Ministry of Electricity and Energy, Myanmar Oil and Gas Enterprise. Digitized document workflows, indexing, secure retrieval, and role-based access.",
+    category: "Enterprise",
+    stack: ["Django", "Python", "PostgreSQL", "Docker", "Nginx"],
+    liveUrl: "#",
+    repoUrl: "https://github.com/Jayyy-mark",
+    image: "/images/project-3.png",
+    year: "2025",
+    badge: "Freelance",
+    accent: "blue",
+    engagement: "Freelance · MOGE",
+  },
+  {
+    id: "moge-hr-management",
+    title: "MOGE — Human Resources Management",
+    description:
+      "Human resources management system for MOGE. Covers employee records, attendance, leave management, and payroll workflows. Built with a clean role-based architecture and containerized deployment.",
+    category: "Enterprise",
+    stack: ["Django", "Python", "PostgreSQL", "Docker", "Linux"],
+    liveUrl: "#",
+    repoUrl: "https://github.com/Jayyy-mark",
+    image: "/images/project-4.png",
+    year: "2025",
+    badge: "Freelance",
+    accent: "violet",
+    engagement: "Freelance · MOGE",
+  },
+  {
+    id: "ucstgo-web-portal",
+    title: "UCSTGO Web Portal",
+    description:
+      "The official website and web portal for University of Computer Studies, Taungoo. Built during my internship — news, announcements, academic program pages, and an information architecture that serves students and faculty.",
+    category: "Web Apps",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express"],
+    liveUrl: "https://www.ucstaungoo.edu.mm/",
+    repoUrl: "https://github.com/Jayyy-mark",
+    image: "/images/project-5.png",
+    year: "2025",
+    badge: "Internship",
+    accent: "cyan",
+    engagement: "Internship · UCST",
   },
 ];

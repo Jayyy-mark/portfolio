@@ -13,7 +13,7 @@ import { Magnetic } from "./Magnetic";
 const navIds = profile.nav.map((n) => n.id);
 
 export function Navbar() {
-  const scrolled = useScrolled(24);
+  const scrolled = useScrolled(16);
   const active = useActiveSection(navIds, 80);
   const [open, setOpen] = React.useState(false);
 
@@ -50,40 +50,45 @@ export function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-3 sm:top-5 inset-x-0 z-50 flex justify-center px-3 sm:px-6"
+        className="fixed top-2 sm:top-4 inset-x-0 z-50 flex justify-center px-2 sm:px-4 lg:px-6"
       >
         <nav
           aria-label="Primary"
           className={cn(
-            "w-full max-w-6xl flex items-center justify-between gap-4 rounded-2xl px-3 sm:px-5 py-2.5 transition-all duration-500",
+            "w-full max-w-6xl flex items-center justify-between gap-2 sm:gap-4 rounded-2xl px-3 sm:px-5 py-2.5 transition-all duration-500",
+            // Always readable: even at the top we use `glass` (not glass-subtle)
+            // so hero text behind the bar can't reduce contrast. On scroll we
+            // step up to `glass-strong` for extra definition.
             scrolled
-              ? "glass-strong glass-highlight shadow-[0_10px_40px_-12px_oklch(0.05_0.02_260/0.7)]"
-              : "glass-subtle"
+              ? "glass-strong glass-highlight shadow-[0_10px_40px_-12px_oklch(0.05_0.02_260/0.75)] border-white/15"
+              : "glass glass-highlight shadow-[0_6px_24px_-10px_oklch(0.05_0.02_260/0.5)] border-white/10"
           )}
         >
-          {/* Monogram */}
+          {/* Monogram + name */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "home")}
-            className="group flex items-center gap-2.5 rounded-xl px-2 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group flex items-center gap-2.5 rounded-xl px-1.5 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shrink-0"
             aria-label={`${profile.name} — home`}
           >
-            <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[oklch(0.85_0.16_195)] via-[oklch(0.72_0.18_240)] to-[oklch(0.70_0.20_295)] text-sm font-bold text-primary-foreground shadow-[0_6px_18px_-6px_oklch(0.55_0.18_240/0.7)]">
+            <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[oklch(0.85_0.16_195)] via-[oklch(0.72_0.18_240)] to-[oklch(0.70_0.20_295)] text-sm font-bold text-primary-foreground shadow-[0_6px_18px_-6px_oklch(0.55_0.18_240/0.7)]">
               {profile.monogram}
               <span className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 bg-gradient-to-br from-[oklch(0.85_0.16_195)] to-[oklch(0.70_0.20_295)] -z-10" />
             </span>
+            {/* Name: hidden on the smallest phones, visible from `sm` up */}
             <span className="hidden sm:flex flex-col leading-none">
-              <span className="text-sm font-semibold tracking-tight">
+              <span className="text-sm font-semibold tracking-tight text-foreground">
                 {profile.name}
               </span>
-              <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span className="text-[10px] uppercase tracking-[0.16em] text-foreground/55">
                 {profile.role.split("&")[0].trim()}
               </span>
             </span>
           </a>
 
-          {/* Desktop nav */}
-          <ul className="hidden md:flex items-center gap-1">
+          {/* Desktop nav links — visible from `lg` (1024px+) so tablets
+              get the clean hamburger treatment instead of a cramped row. */}
+          <ul className="hidden lg:flex items-center gap-0.5">
             {profile.nav.map((item) => {
               const isActive = active === item.id;
               return (
@@ -92,17 +97,17 @@ export function Navbar() {
                     href={`#${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id)}
                     className={cn(
-                      "relative rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-300",
+                      "relative rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-300",
                       isActive
                         ? "text-foreground"
-                        : "text-muted-foreground hover:text-foreground"
+                        : "text-foreground/65 hover:text-foreground"
                     )}
                     aria-current={isActive ? "page" : undefined}
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-active"
-                        className="absolute inset-0 -z-10 rounded-lg glass-subtle border border-white/10"
+                        className="absolute inset-0 -z-10 rounded-lg glass-subtle border border-white/15"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -114,7 +119,7 @@ export function Navbar() {
           </ul>
 
           {/* CTA + mobile toggle */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <Magnetic strength={10} className="hidden sm:block">
               <GradientButton
                 href="#contact"
@@ -132,7 +137,7 @@ export function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="grid md:hidden h-10 w-10 place-items-center rounded-xl glass-subtle glass-highlight text-foreground hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="grid lg:hidden h-10 w-10 place-items-center rounded-xl glass-strong glass-highlight text-foreground hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -140,11 +145,11 @@ export function Navbar() {
         </nav>
       </motion.header>
 
-      {/* Mobile menu sheet */}
+      {/* Mobile menu sheet — shown below `lg` (1024px) */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden fixed inset-0 z-40"
+            className="lg:hidden fixed inset-0 z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -152,14 +157,14 @@ export function Navbar() {
             <button
               aria-label="Close menu backdrop"
               onClick={() => setOpen(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             />
             <motion.div
               initial={{ y: -24, opacity: 0, scale: 0.96 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
               exit={{ y: -24, opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute top-20 inset-x-3 mx-auto max-w-md glass-strong glass-highlight rounded-3xl p-4 shadow-2xl"
+              className="absolute top-20 inset-x-3 sm:inset-x-4 mx-auto max-w-md glass-strong glass-highlight rounded-3xl p-4 shadow-2xl"
             >
               <ul className="flex flex-col">
                 {profile.nav.map((item, i) => {
@@ -178,7 +183,7 @@ export function Navbar() {
                           "flex items-center justify-between rounded-2xl px-4 py-3.5 text-base font-medium transition-colors",
                           isActive
                             ? "bg-white/10 text-foreground"
-                            : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                            : "text-foreground/70 hover:text-foreground hover:bg-white/5"
                         )}
                       >
                         <span>{item.label}</span>

@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-28 sm:pt-32 pb-20"
+      className="relative min-h-[100svh] flex items-center pt-32 sm:pt-36 lg:pt-40 pb-24"
       aria-label="Introduction"
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">

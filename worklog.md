@@ -79,3 +79,42 @@ Stage Summary:
 - Eliminated the two biggest scroll-jank sources (body fixed-background repaint + cursor-glow layout thrash) and five secondary costs.
 - Glassmorphism aesthetic fully preserved (VLM-verified).
 - Net effect on a real user's browser: scrolling is now composite-only (transform/opacity) instead of triggering layout + full-page repaints; offscreen sections cost ~nothing to render until scrolled into view.
+
+---
+Task ID: 16
+Agent: main (orchestrator)
+Task: Fix navbar visibility (text behind it reducing legibility) and make it fully responsive across all screen sizes
+
+Work Log:
+- Diagnosed via VLM + Agent Browser across 7 viewports (360, 375, 390, 768, 1024, 1280, 1440, 1920px):
+  - Root cause of "can't be seen clearly": at the top of the page the navbar used `glass-subtle` (white/4% bg, blur 8px) — too faint, so hero content showed through and reduced contrast. VLM confirmed on iPad landscape (1024px): "the large white heading is positioned directly behind/underneath the left side of the navbar... creating visual noise."
+  - Responsiveness issue: desktop nav links appeared at `md` (768px) which cramped 6 links + monogram + name + CTA into a 768px row on tablets.
+- Navbar.tsx rewrite:
+  - Default (top): switched from `glass-subtle` → `glass` (blur 16px, white/8% bg) + `glass-highlight` + persistent shadow + border-white/10 — always readable regardless of what's behind it.
+  - Scrolled: `glass-strong` (blur 22px) + stronger shadow + border-white/15 — extra definition.
+  - Nav link text: bumped from `text-muted-foreground` → `text-foreground/65` (default) and `text-foreground` (active/hover) for higher contrast.
+  - Brand name text: `text-foreground` (was muted) + role `text-foreground/55`.
+  - Desktop nav links: breakpoint `md` (768px) → `lg` (1024px) so tablets portrait get the clean hamburger sheet instead of a cramped 6-link row.
+  - Mobile sheet + hamburger: breakpoint `md` → `lg` to match.
+  - Hamburger button: upgraded from `glass-subtle` → `glass-strong` for visibility on mobile.
+  - Sheet max width `max-w-md` with `inset-x-3 sm:inset-x-4` for comfortable margins on phones + tablets.
+  - Added `shrink-0` to monogram + CTA group so they never get squeezed by flex.
+  - Reduced top offset `top-3 sm:top-5` → `top-2 sm:top-4`, side padding `px-3 sm:px-6` → `px-2 sm:px-4 lg:px-6` for more room on small screens.
+- Hero.tsx: increased top padding `pt-28 sm:pt-32` → `pt-32 sm:pt-36 lg:pt-40` and switched `min-h-screen` → `min-h-[100svh]` so the headline never sits under the navbar on short/tablet-landscape viewports and the mobile address bar doesn't cause layout jumps.
+- Verification (VLM + Agent Browser, 8 viewports):
+  - 360px (smallest Android): no overflow (0px), navbar readable, monogram + hamburger visible.
+  - 375px (iPhone SE): readable, no overlap, hamburger + logo.
+  - 390px (iPhone 14 Pro): readable, no overlap.
+  - 768px (iPad portrait): readable, no overlap, monogram + name + CTA + hamburger (clean tablet treatment). Mobile menu opens correctly with all 6 links + Let's Talk CTA — VLM: "clean, modern design... excellent readability on a tablet."
+  - 1024px (iPad landscape): readable, no overlap, nav links + CTA visible (desktop nav kicks in at lg).
+  - 1280px / 1440px / 1920px (laptops + ultrawide): readable, no overlap, full nav links + CTA, centered and contained.
+  - VLM confirms across all sizes: "clearly readable," "good contrast," "no overlap," "properly contained."
+- `bun run lint` clean; no console/runtime errors; dev log clean.
+
+Stage Summary:
+- Navbar is now always readable: uses `glass` (medium) at top instead of `glass-subtle`, with persistent shadow + border, so hero text can't reduce contrast.
+- Fully responsive across all tested sizes (360px → 1920px):
+  - <640px (phones): monogram + hamburger.
+  - 640–1023px (large phones + tablets portrait): monogram + name + CTA + hamburger.
+  - 1024px+ (tablets landscape, laptops, desktops, ultrawide): monogram + name + full nav links + CTA.
+- Hero no longer has text sitting under the navbar (increased top padding + 100svh viewport).

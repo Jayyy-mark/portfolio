@@ -135,13 +135,12 @@ export function Hero() {
                   aria-hidden="true"
                 />
                 <div
-                  className={reduced ? "" : "animate-spin-slow"}
+                  className={reduced ? "" : "animate-spin-slow will-change-transform"}
                   style={{
                     background:
                       "conic-gradient(from 0deg, oklch(0.85 0.16 195), oklch(0.70 0.20 295), oklch(0.78 0.18 240), oklch(0.85 0.16 195))",
                   }}
                   aria-hidden="true"
-                  // rounded mask
                 >
                   <div className="h-full w-full rounded-[2rem] p-[1.5px] [mask:linear-gradient(black,black)_content-box,linear-gradient(black,black)] [mask-composite:exclude]">
                     <div className="h-full w-full" />

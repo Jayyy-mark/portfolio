@@ -11,7 +11,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative py-24 sm:py-32 scroll-mt-20"
+      className="relative py-24 sm:py-32 scroll-mt-20 cv-auto"
       aria-label="About"
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">

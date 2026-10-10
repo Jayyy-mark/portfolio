@@ -50,3 +50,32 @@ Stage Summary:
 - Contact form is honest: validates client-side + server-side (Zod), logs to console, returns a clearly-labeled demo response, with an inline notice explaining no email is actually sent and pointing to the exact file + block to edit for real delivery.
 - All editable content lives in src/data/ and src/app/globals.css; rebranding requires editing only those files.
 - Verified clean: lint passes, no console/runtime errors, no horizontal overflow, sticky footer works, mobile menu works, all interactions functional.
+
+---
+Task ID: 15
+Agent: main (orchestrator)
+Task: Fix scroll jank / unsmooth scrolling reported by user
+
+Work Log:
+- Diagnosed root causes of scroll jank on a glassmorphism site:
+  1. `background-attachment: fixed` + multi-radial-gradient `background-image` on <body> forces a repaint of the body background on every scroll frame.
+  2. Cursor-follow glow used `left/top` inline styles with a CSS transition -> triggered layout on every mousemove (and during scroll) for a large blurred element.
+  3. Full-page SVG noise with `mix-blend-soft-light` forced a per-pixel composite pass each frame.
+  4. `useScrolled` setState'd directly on every scroll event (no rAF throttle).
+  5. Rotating conic-gradient ring in Hero had no `will-change` -> risk of re-rasterizing the conic gradient on each frame.
+  6. Below-the-fold sections were always laid out/painted even when offscreen.
+  7. `backdrop-filter` blur radii were larger than necessary (18/28/10px) with saturate(140-160%).
+- Fixes applied:
+  - globals.css: removed `background-image` + `background-attachment: fixed` from body (now flat color only); added `overscroll-behavior-y: none`; moved the 4 corner radial gradients onto the fixed Background layer as a single static div (painted once, composited, no per-scroll repaint).
+  - Created src/components/portfolio/CursorGlow.tsx: isolated component using `transform: translate3d()` instead of `left/top`, `will-change-transform`, no layout-thrash; isolates re-renders so cursor movement no longer re-renders the whole Background.
+  - Background.tsx: removed cursor logic (now in CursorGlow), added static corner-gradient layer, removed `mix-blend-soft-light` from noise SVG (opacity-only now), added `will-change-transform` to all three animated orbs, reduced noise opacity 0.05->0.04 and grid opacity 0.18->0.16.
+  - globals.css glass utilities: reduced blur radii (glass 18->16px, glass-strong 28->22px, glass-subtle 10->8px), reduced saturate (140/160/120% -> 1.1/1.15/none) to cut per-pixel cost while keeping the frosted look (VLM confirmed no visual regression).
+  - use-scrolled.ts: rAF-throttled, only updates state on value change.
+  - Hero.tsx: added `will-change-transform` to the rotating conic-gradient ring so it composites without re-rasterizing.
+  - globals.css: added `.cv-auto` utility (`content-visibility: auto; contain-intrinsic-size: auto 720px`) and applied it to About/Projects/Skills/Experience/Contact sections so offscreen sections skip layout+paint entirely.
+- Verification: `bun run lint` clean; dev server compiles cleanly; Agent Browser confirms no console/page errors, body `background-attachment: scroll` and `background-image: none` (fixed bg removed), `content-visibility: auto` active on all 5 below-fold sections, nav active-section indicator still updates correctly (e.g. "Experience" after scrolling), all sections still render. VLM review of hero screenshot: "premium dark glassmorphism hero featuring distinct frosted glass panels, vibrant gradient background orbs, and a high-quality 3D avatar... no visual regression or flatness; excellent depth through sophisticated layering, realistic blur effects, and dynamic lighting."
+
+Stage Summary:
+- Eliminated the two biggest scroll-jank sources (body fixed-background repaint + cursor-glow layout thrash) and five secondary costs.
+- Glassmorphism aesthetic fully preserved (VLM-verified).
+- Net effect on a real user's browser: scrolling is now composite-only (transform/opacity) instead of triggering layout + full-page repaints; offscreen sections cost ~nothing to render until scrolled into view.

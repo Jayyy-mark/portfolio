@@ -123,16 +123,16 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Only a flat color here. All atmospheric gradients live on the
+       fixed Background component so nothing repaints during scroll. */
     background-color: var(--background);
-    background-image:
-      radial-gradient(60% 50% at 15% 10%, oklch(0.40 0.16 280 / 0.35) 0%, transparent 60%),
-      radial-gradient(50% 40% at 90% 15%, oklch(0.55 0.18 220 / 0.30) 0%, transparent 55%),
-      radial-gradient(55% 60% at 80% 95%, oklch(0.50 0.16 200 / 0.28) 0%, transparent 60%),
-      radial-gradient(40% 40% at 10% 90%, oklch(0.45 0.18 300 / 0.22) 0%, transparent 55%);
-    background-attachment: fixed;
     color: var(--foreground);
     font-feature-settings: "cv11", "ss01", "ss03";
     min-height: 100vh;
+    /* Promote body to its own layer + opt into smoother scrolling.
+       `overscroll-behavior` stops the page from chaining scroll to
+       the parent in embedded contexts. */
+    overscroll-behavior-y: none;
   }
 
   ::selection {
@@ -156,15 +156,17 @@
    Glassmorphism utility layers
    ========================================================= */
 @layer components {
-  /* Frosted glass panel */
+  /* Frosted glass panel.
+     Note: blur radius is tuned for smooth scrolling — large blur on
+     many stacked panels is the main glassmorphism perf cost. */
   .glass {
     background: linear-gradient(
       135deg,
       oklch(1 0 0 / 0.08) 0%,
       oklch(1 0 0 / 0.02) 100%
     );
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(1.1);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
     border: 1px solid oklch(1 0 0 / 0.10);
     box-shadow: var(--shadow-glass);
   }
@@ -175,16 +177,16 @@
       oklch(1 0 0 / 0.12) 0%,
       oklch(1 0 0 / 0.04) 100%
     );
-    backdrop-filter: blur(28px) saturate(160%);
-    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(1.15);
+    -webkit-backdrop-filter: blur(22px) saturate(1.15);
     border: 1px solid oklch(1 0 0 / 0.14);
     box-shadow: var(--shadow-glass);
   }
 
   .glass-subtle {
     background: oklch(1 0 0 / 0.04);
-    backdrop-filter: blur(10px) saturate(120%);
-    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid oklch(1 0 0 / 0.06);
   }
 
@@ -272,6 +274,13 @@
   }
   .animate-scroll-hint {
     animation: scrollHint 1.8s ease-in-out infinite;
+  }
+
+  /* Skip rendering work for offscreen sections. The intrinsic-size
+     estimate keeps layout stable so scroll position doesn't jump. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
   }
 }
 
